@@ -1,0 +1,10 @@
+.MuiMenu-list{
+    display: flex;
+}
+.MuiPaper-elevation8{
+    border-radius: 10px;
+}
+.MuiButton-root{
+    padding:0px;
+    min-width: 0px;
+}
