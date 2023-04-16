@@ -1,14 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createId } from "../../../utils";
 import "./style.css";
 
-const TodoModal = ({ mode = "add", isModalOpen, setIsModalOpen, setList }) => {
+const TodoModal = ({ mode = "add", isModalOpen, setIsModalOpen, onChange }) => {
   const [inputValues, setInputValues] = useState({
     title: "",
     description: "",
     status: "",
     id: "",
   });
+
+  /* useEffect(() => {
+    if (mode === "edit") {
+       setInputValues(list); 
+    }
+  }, [isModalOpen]); */
+
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -22,48 +29,18 @@ const TodoModal = ({ mode = "add", isModalOpen, setIsModalOpen, setList }) => {
     });
   };
 
-  /*  const [inputValues, setInputValues] = useState({
-    title: "",
-    description: "",
-  });
-  const [list, setList] = useState([]);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    setInputValues((prev) => {
-      return {
-        ...prev,
-        [name]: value,
-      };
-    });
+  const handelActionTask = () => {
+    if (mode === "add") {
+      onChange({ inputValues, setInputValues });
+      return;
+    }
   };
 
-  const addTask = () => {
-    setList((prev) => {
-      return [...prev, inputValues];
-    });
-
-    setInputValues({
-      title: "",
-      description: "",
-    });
-
-    setIsModalOpen(false);
-  }; */
-  const addTask = () => {
-    setList((prev) => {
-      return [...prev, inputValues];
-    });
-
-    setInputValues({
-      title: "",
-      description: "",
-    });
-
-    setIsModalOpen(false);
+  const editTask = () => {
+    /* if (mode === "edit") {
+      setInputValues(list);
+    } */
   };
-
   return (
     <div className={`todoModal ${isModalOpen ? "todoModalOpen" : ""}`}>
       <div className={`${isModalOpen ? "todoModalBody" : ""}`}>
@@ -74,7 +51,9 @@ const TodoModal = ({ mode = "add", isModalOpen, setIsModalOpen, setList }) => {
           >
             ×
           </samp>
-          <p>NEW TASK</p>
+          <p className="todoModalText">
+            {mode === "add" ? "NEW TASK" : "Edit task"}
+          </p>
         </div>
         <div className="todoModalBodyContent">
           <label className="todoModalBodyContentText">Title</label>
@@ -95,10 +74,17 @@ const TodoModal = ({ mode = "add", isModalOpen, setIsModalOpen, setList }) => {
             onChange={handleChange}
           ></input>
         </div>
-        <button className="todoModalBodyButton" onClick={() => addTask()}>
-          Add
+        <button
+          className="todoModalBodyButton"
+          onClick={mode === "add" ? handelActionTask : editTask}
+        >
+          {mode === "add" ? " Add" : "Edit"}
         </button>
       </div>
+      <div
+        className="modalBackground"
+        onClick={() => setIsModalOpen(false)}
+      ></div>
     </div>
   );
 };
