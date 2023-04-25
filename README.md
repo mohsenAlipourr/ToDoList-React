@@ -1,5 +1,7 @@
 Todo Application
 
+Features:
+
 ➕ Add todos
 
 ✏️ Edit todos
