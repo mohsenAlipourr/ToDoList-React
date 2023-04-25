@@ -1,6 +1,11 @@
 Todo Application
 
-Features:
+Technology used :
+
+React.js
+css
+
+Features :
 
 ➕ Add todos
 
@@ -8,8 +13,9 @@ Features:
 
 🗑️ Delete todos
 
-⏸ Save todos to Local Storage when the state changes
-
-▶️ Load the todos from Local Storage when the site is loaded again
+⏸ When the status changes, the tasks are saved in Local Storage
 
 🌙 Light \ dark mode toggle
+
+📱 Responsive
+
