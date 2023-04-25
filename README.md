@@ -1,4 +1,8 @@
+Todo Application
+
 ➕ Add todos
+
+✏️ Edit todos
 
 🗑️ Delete todos
 
