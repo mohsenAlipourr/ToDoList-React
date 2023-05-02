@@ -9,3 +9,8 @@ export const createId = () => {
   const id = month + date + year + hours + minutes + seconds;
   return id;
 };
+
+export const cloneList = (list) => {
+  if (!list) return;
+  return JSON.parse(JSON.stringify(list));
+};

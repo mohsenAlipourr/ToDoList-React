@@ -1,10 +1,6 @@
-.todoBody{
-    width: 475px;
-    height: 666px;
-    margin: 0 auto;
-    background: #fdfdfd;
-    border-radius: 7px;
-    box-shadow: 0 0 37px rgb(0 0 0 / 20%)
+.todoBodyFooter{
+    display: flex;
+    justify-content: center;
 }
 .todoBodyFooterButton{
     display: flex;
@@ -18,13 +14,4 @@
     border: 1px solid #5ca8e0;
     cursor: pointer;
     background: linear-gradient(180deg, rgba(10,203,245,1) 0%, rgba(29,119,223,1) 100%);
-}
-.todoBodyTitle{
-    display: flex;
-    justify-content: center;
-    font-size: 25px;
-}
-.todoBodyFooter{
-    display: flex;
-    justify-content: center;
 }

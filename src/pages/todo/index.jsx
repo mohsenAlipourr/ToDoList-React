@@ -1,22 +1,15 @@
-import { useState } from "react";
-import { TodoModal, TodoList } from "../../components/todo";
+import { useEffect, useState } from "react";
+import { TodoAddTask, TodoList } from "../../components/todo";
 import "./style.css";
 
 const Todo = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [list, setList] = useState([]);
+  const [list, setList] = useState(
+    JSON.parse(localStorage.getItem("todo_list")) || []
+  );
 
-  const addNewTask = ({ inputValues, setInputValues }) => {
-    setList((prev) => [...prev, inputValues]);
-
-    setIsModalOpen(false);
-    setInputValues({
-      title: "",
-      description: "",
-      status: "",
-      id: "",
-    });
-  };
+  useEffect(() => {
+    localStorage.setItem("todo_list", JSON.stringify(list));
+  }, [list]);
 
   return (
     <div className="todoContainer">
@@ -24,24 +17,9 @@ const Todo = () => {
         <div className="todoBodyTitle">
           <p>TODO</p>
         </div>
-
         <TodoList list={list} setList={setList} />
 
-        <div className="todoBodyFooter">
-          <button
-            className="todoBodyFooterButton"
-            onClick={() => setIsModalOpen(true)}
-          >
-            +
-          </button>
-        </div>
-
-        <TodoModal
-          mode="add"
-          isModalOpen={isModalOpen}
-          setIsModalOpen={setIsModalOpen}
-          onChange={addNewTask}
-        />
+        <TodoAddTask setList={setList} />
       </div>
     </div>
   );

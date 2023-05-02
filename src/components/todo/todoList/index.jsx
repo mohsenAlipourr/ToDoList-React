@@ -1,54 +1,44 @@
 import { useState } from "react";
 import TodoModal from "../todoModal";
-import MenuTodo from "./menu";
+import MenuItem from "./menuItem";
 import "./style.css";
+import { cloneList } from "../../../utils";
 
 const TodoList = ({ list, setList }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isMenu, setIsMenu] = useState(false);
+  const [itemSelected, setItemSelected] = useState({});
 
   const doneTask = (id) => {
-    const newState = list.map((obj) => {
-      if (obj.id === id && obj.status === "active") {
-        return { ...obj, status: "inactive" };
-      }
-      if (obj.id === id && obj.status === "inactive") {
-        return { ...obj, status: "active" };
-      }
-      return obj;
-    });
+    const index = list.findIndex((item) => item.id === id);
 
-    setList(newState);
+    const doneTaskList = cloneList(list);
+
+    if (doneTaskList[index].status === "active") {
+      doneTaskList[index].status = "inactive";
+    } else {
+      doneTaskList[index].status = "active";
+    }
+
+    setList(doneTaskList);
   };
 
   const deleteTask = (id) => {
     const index = list.findIndex((item) => item.id === id);
+    const deleteList = cloneList(list);
 
-    /* list.splice(index, 1); //bug
-
-    const deleteList = list.map((item) => {
-      return item;
-    });
-
-    setList(deleteList); */
-
-    const deleteList = [...list];
     deleteList.splice(index, 1);
     setList(deleteList);
   };
 
-  const editTask = () => {
-    /* if (mode === "edit") {
-      setInputValues(list);
-    } */
-  };
+  const editTask = ({ inputValues }) => {
+    const index = list.findIndex((item) => item.id === itemSelected.id);
+    const editTaskList = cloneList(list);
 
-  const handelMenu = () => {
-    if (isMenu) {
-      setIsMenu(false);
-    } else {
-      setIsMenu(true);
-    }
+    editTaskList[index].title = inputValues.title;
+    editTaskList[index].description = inputValues.description;
+
+    setList(editTaskList);
+    setIsModalOpen(false);
   };
 
   return (
@@ -56,39 +46,27 @@ const TodoList = ({ list, setList }) => {
       <ul className="todoContent">
         {list.map((item, index) => (
           <li key={index} className="list">
-            <div>
-              <span className={item.status === "inactive" ? "buttonDone" : ""}>
-                {item.title}
-              </span>
-            </div>
-            <div className="contentButton">
-              <button
-                className="button"
-                onClick={list.length ? () => doneTask(item.id) : ""}
-              >
-                {item.status === "inactive" ? (
-                  <img src="/icons/tickicon.png"></img>
-                ) : (
-                  ""
-                )}
-              </button>
+            <span className={item.status === "inactive" ? "buttonDone" : ""}>
+              {item.title}
+            </span>
 
-              {/*  <MenuTodo
+            <div className="todoContentButton">
+              <div className="contentButton">
+                <button className="button" onClick={() => doneTask(item.id)}>
+                  {item.status === "inactive" ? (
+                    <img src="/icons/tickicon.png" />
+                  ) : (
+                    <></>
+                  )}
+                </button>
+              </div>
+
+              <MenuItem
                 deleteTask={deleteTask}
                 item={item}
                 setIsModalOpen={setIsModalOpen}
-              /> */}
-
-              <img
-                className="imgMore "
-                src="/icons/more.png"
-                onClick={() => handelMenu(true)}
-              ></img>
-
-              <div className={isMenu ? "activeMenu" : "openMenu"}>
-                <img src="/icons/editTask.png"></img>
-                <img src="/icons/deleteTask.png"></img>
-              </div>
+                setItemSelected={setItemSelected}
+              />
             </div>
           </li>
         ))}
@@ -100,6 +78,7 @@ const TodoList = ({ list, setList }) => {
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
         onChange={editTask}
+        itemSelected={itemSelected}
       />
     </>
   );

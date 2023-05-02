@@ -12,19 +12,7 @@
     border-radius: 7px;
     box-shadow: 0 0 37px rgb(0 0 0 / 20%)
 }
-.todoBodyFooterButton{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 55px;
-    height: 55px;
-    border-radius: 100%;
-    color: white;
-    font-size: 40px;
-    border: 1px solid #5ca8e0;
-    cursor: pointer;
-    background: linear-gradient(180deg, rgba(10,203,245,1) 0%, rgba(29,119,223,1) 100%);
-}
+
 .todoBodyTitle{
     display: flex;
     justify-content: center;
@@ -32,7 +20,4 @@
     font-family: sans-serif;
     font-weight: bold;
 }
-.todoBodyFooter{
-    display: flex;
-    justify-content: center;
-}
+
