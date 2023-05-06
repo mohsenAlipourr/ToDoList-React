@@ -1,12 +1,7 @@
-import TodoBody from "./component/todo/todoBody";
+import Todo from "./pages/todo";
 
-document.body.style.backgroundColor = "rgb(248, 226, 240)";
 const App = () => {
-  return (
-    <>
-      <TodoBody />
-    </>
-  );
+  return <Todo />;
 };
 
 export default App;

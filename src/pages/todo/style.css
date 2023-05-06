@@ -1,0 +1,23 @@
+.todoContainer{
+    display: flex;
+    align-items: center;
+    background: linear-gradient(180deg, rgba(248,226,240,1) 0%, rgba(221,230,248,1) 100%);
+    min-height: 100vh;
+}
+.todoBody{
+    width: 475px;
+    height: 666px;
+    margin: 0 auto;
+    background-image:url('/public/background.jpg'); 
+    border-radius: 7px;
+    box-shadow: 0 0 37px rgb(0 0 0 / 20%)
+}
+
+.todoBodyTitle{
+    display: flex;
+    justify-content: center;
+    font-size: 25px;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
