@@ -19,7 +19,6 @@
 
 .list{
     height: 50px;
-    width: 370px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -29,6 +28,7 @@
     margin-bottom: 25px;
     box-shadow: 0 0 12px rgb(0 0 0 / 6%);
     background: white;
+    margin-right: 20px;
 }
 .button{
     display: flex;
@@ -51,6 +51,12 @@
 .buttonDone{
     text-decoration: line-through;
     color: #afafaf;
+}
+
+@media screen and (max-width: 600px) {
+    .todoContent{
+        height: 100%;
+    }
 }
 
 
